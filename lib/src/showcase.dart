@@ -617,7 +617,12 @@ class _ShowcaseState extends State<Showcase> {
             titleTextDirection: widget.titleTextDirection,
             descriptionTextDirection: widget.descriptionTextDirection,
             toolTipSlideEndDistance: widget.toolTipSlideEndDistance,
-            onTitleTap: _getOnTargetTap,
+            onTitleTap: () {
+              if (!showCaseWidgetState.disableBarrierInteraction && !widget.disableBarrierInteraction) {
+                _nextIfAny();
+              }
+              widget.onBarrierClick?.call();
+            },
           ),
         ],
         if (widget.closeWidget != null) widget.closeWidget!
